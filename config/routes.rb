@@ -4,6 +4,6 @@ Rails.application.routes.draw do
   post 'user_token' => 'user_token#create', defaults: { format: :json }
 
   namespace :api, defaults: { format: :json } do
-    resources :users, only: %i[create show]
+    resources :users, except: [:new]
   end
 end

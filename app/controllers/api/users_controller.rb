@@ -1,6 +1,11 @@
 module Api
   class UsersController < ApplicationController
-    before_action :authenticate_user, only: [:show]
+    before_action :authenticate_user, except: [:create]
+    before_action :find_user, only: %i[show destroy update]
+
+    def index
+      @users = User.order(:id).page params[:page]
+    end
 
     def create
       @form = UserCreation.new(user_params)
@@ -11,14 +16,26 @@ module Api
       end
     end
 
-    def show
-      @user = User.find_by!(id: params[:id])
+    def show; end
+
+    def destroy
+      if current_user.administrator?
+        @user.destroy
+
+        head :ok
+      else
+        head :forbidden
+      end
     end
 
     private
 
     def user_params
       params.require(:user).permit(:username, :password, :first_name, :last_name, :patronymic)
+    end
+
+    def find_user
+      @user = User.find_by!(id: params[:id])
     end
   end
 end
