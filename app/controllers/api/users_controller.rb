@@ -8,7 +8,7 @@ module Api
     end
 
     def create
-      @form = UserCreation.new(user_params)
+      @form = UserCreation.new(create_user_params)
       if @form.save
         render status: :created
       else
@@ -17,6 +17,8 @@ module Api
     end
 
     def show; end
+
+    def update; end
 
     def destroy
       if current_user.administrator?
@@ -30,8 +32,8 @@ module Api
 
     private
 
-    def user_params
-      params.require(:user).permit(:username, :password, :first_name, :last_name, :patronymic)
+    def create_user_params
+      params.require(:user).permit(:username, :email, :password, :first_name, :last_name, :patronymic)
     end
 
     def find_user

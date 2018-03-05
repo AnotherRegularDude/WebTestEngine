@@ -75,7 +75,10 @@ CREATE TABLE users (
     patronymic text,
     role integer DEFAULT 0 NOT NULL,
     created_at timestamp without time zone NOT NULL,
-    updated_at timestamp without time zone NOT NULL
+    updated_at timestamp without time zone NOT NULL,
+    email text NOT NULL,
+    activated boolean DEFAULT false NOT NULL,
+    email_confirmation text
 );
 
 
@@ -130,6 +133,13 @@ ALTER TABLE ONLY users
 
 
 --
+-- Name: index_users_on_email; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE UNIQUE INDEX index_users_on_email ON users USING btree (email);
+
+
+--
 -- Name: index_users_on_username; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -144,6 +154,8 @@ SET search_path TO "$user", public;
 
 INSERT INTO "schema_migrations" (version) VALUES
 ('20180304232957'),
-('20180304233032');
+('20180304233032'),
+('20180305022201'),
+('20180305023427');
 
 
