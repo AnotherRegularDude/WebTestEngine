@@ -19,15 +19,12 @@ module Api
     def show; end
 
     def update
-      if current_user == @user
-        @form = UserUpdatingForm.new(user_update_params)
-        @form.user = @user
+      result = UserInformationUpdater.call(user: @user, current_user: current_user, update_params: user_update_params)
 
-        if @form.save
-          render :create, status: :ok
-        else
-          render :create, status: :bad_request
-        end
+      if result.present?
+        @form = result[:form]
+
+        render :create, status: result[:status]
       else
         head :forbidden
       end

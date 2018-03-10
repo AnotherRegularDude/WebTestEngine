@@ -1,4 +1,3 @@
-
 class UserUpdatingForm < ApplicationForm
   attr_reader :user
 

@@ -4,6 +4,6 @@ class UserDecorator < ApplicationDecorator
   end
 
   def as_json(options = {})
-    super(options).except('password_digest', 'email_confirmation')
+    super(options).except('password_digest', 'email_confirmation').merge('full_name' => full_name)
   end
 end
