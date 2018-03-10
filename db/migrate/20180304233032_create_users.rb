@@ -4,8 +4,8 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.text :username, null: false
       t.text :password_digest, null: false
 
-      t.text :first_name
-      t.text :last_name
+      t.text :first_name, null: false
+      t.text :last_name, null: false
       t.text :patronymic
 
       t.integer :role, default: 0, null: false

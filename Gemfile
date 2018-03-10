@@ -6,6 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bcrypt', '~> 3.1.7'
+gem 'draper'
 gem 'faker'
 gem 'hashie'
 gem 'kaminari'

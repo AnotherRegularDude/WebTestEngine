@@ -4,7 +4,7 @@ module Api
     before_action :find_user, only: %i[show destroy update]
 
     def index
-      @users = User.order(:id).page params[:page]
+      @users = User.order(:id).page(params[:page]).decorate
     end
 
     def create
@@ -21,7 +21,7 @@ module Api
     def update; end
 
     def destroy
-      if current_user.administrator?
+      if current_user == @user
         @user.destroy
 
         head :ok
@@ -37,7 +37,7 @@ module Api
     end
 
     def find_user
-      @user = User.find_by!(id: params[:id])
+      @user = User.find_by!(id: params[:id]).decorate
     end
   end
 end

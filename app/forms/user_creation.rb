@@ -9,6 +9,7 @@ class UserCreation < ApplicationForm
   attribute :patronymic, String
 
   validates :username, :password, presence: true
+  validates :first_name, :last_name, presence: true, length: { maximum: 40 }
   validates :email, format: {
     with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i,
     message: 'invalid email address'
@@ -25,7 +26,8 @@ class UserCreation < ApplicationForm
   private
 
   def persist!
-    @user = User.create!(attributes)
+    @user = User.create!(attributes).decorate
+
     EmailerJob.perform_later(@user)
   rescue ActiveRecord::RecordInvalid => invalid
     self.errors = invalid.errors
