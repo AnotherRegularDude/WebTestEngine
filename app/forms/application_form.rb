@@ -1,6 +1,5 @@
 class ApplicationForm
   include Virtus.model
-
   include ActiveModel::Model
 
   def persisted?
@@ -8,11 +7,9 @@ class ApplicationForm
   end
 
   def save
-    if valid?
-      persist!
-      return true
-    end
+    return false unless valid?
 
-    false
+    persist!
+    true
   end
 end

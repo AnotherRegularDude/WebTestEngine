@@ -1,4 +1,4 @@
-class UserCreation < ApplicationForm
+class RegistrationForm < ApplicationForm
   attr_reader :user
 
   attribute :username, String
@@ -10,6 +10,7 @@ class UserCreation < ApplicationForm
 
   validates :username, :password, presence: true
   validates :first_name, :last_name, presence: true, length: { maximum: 40 }
+  validates :patronymic, length: { maximum: 50 }, allow_nil: true
   validates :email, format: {
     with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i,
     message: 'invalid email address'
@@ -30,6 +31,6 @@ class UserCreation < ApplicationForm
 
     EmailerJob.perform_later(@user)
   rescue ActiveRecord::RecordInvalid => invalid
-    self.errors = invalid.errors
+    @errors = invalid.record.errors
   end
 end
