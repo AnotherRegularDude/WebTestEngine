@@ -1,6 +1,6 @@
 module Api
   class UsersController < ApplicationController
-    before_action :authenticate_user, except: [:create]
+    skip_before_action :authenticate_user, only: [:create]
     before_action :find_user, except: %i[index create]
 
     def index
@@ -19,7 +19,8 @@ module Api
     def show; end
 
     def update
-      result = UserInformationUpdater.call(user: @user, current_user: current_user, update_params: user_update_params)
+      authorize @user
+      result = UserInformationUpdater.call(user: @user, update_params: user_update_params)
 
       if result.present?
         @form = result[:form]
@@ -31,13 +32,10 @@ module Api
     end
 
     def destroy
-      if current_user == @user
-        @user.destroy
+      authorize @user
+      @user.destroy
 
-        head :ok
-      else
-        head :forbidden
-      end
+      head :ok
     end
 
     private

@@ -1,3 +1,4 @@
 global_info:
   url: http://localhost:3000
-  redis_address: redis://redis:6379/0
+  redis:
+    connection_url: <%= ENV['REDIS_CONNECTION_URL'] %>

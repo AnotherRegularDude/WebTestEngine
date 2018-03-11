@@ -1,0 +1,2 @@
+class TopicDecorator < ApplicationDecorator
+end

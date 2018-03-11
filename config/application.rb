@@ -21,7 +21,7 @@ module WebTestEngine
 
     config.x = Hashie::Mash.new YAML.safe_load(ERB.new(File.read(Rails.root.join('config', 'settings.yml'))).result)
 
-    config.cache_store = :redis_store, "#{config.x.global_info.redis_address}/cache", { expires_in: 90.minutes }
+    config.cache_store = :redis_store, "#{config.x.global_info.redis.connection_url}/cache", { expires_in: 90.minutes }
     config.active_job.queue_adapter = :sidekiq
 
     config.middleware.insert_before 0, Rack::Cors do
