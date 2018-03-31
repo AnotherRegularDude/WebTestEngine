@@ -1,10 +1,19 @@
 {
-  "name": "web_test_engine",
+  "name": "WebTestEngine",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.3.0"
+    "@rails/webpacker": "^3.3.0",
+    "buefy": "^0.6.5",
+    "mdi": "^2.2.43",
+    "vue": "^2.5.15",
+    "vue-loader": "^14.2.1",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.15"
   },
   "devDependencies": {
-    "webpack-dev-server": "2.11.1"
+    "babel-plugin-module-resolver": "^3.1.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "webpack-cli": "^2.0.13",
+    "webpack-dev-server": "3.0.0"
   }
 }

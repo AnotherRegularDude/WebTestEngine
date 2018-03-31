@@ -1,18 +1,32 @@
 {
   "presets": [
-    ["env", {
-      "modules": false,
-      "targets": {
-        "browsers": "> 1%",
-        "uglify": true
-      },
-      "useBuiltIns": true
-    }]
+    [
+      "env",
+      {
+        "modules": false,
+        "targets": {
+          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"],
+          "uglify": true
+        },
+        "useBuiltIns": true
+      }
+    ],
+    "stage-2"
   ],
 
   "plugins": [
     "syntax-dynamic-import",
-    "transform-object-rest-spread",
-    ["transform-class-properties", { "spec": true }]
+    [
+      "module-resolver",
+      {
+        "root": ["./app/javascript"],
+        "alias": {
+          "assets": "./app/javascript/src",
+          "packs": "./app/javascript/packs",
+          "components": "./app/javascript/components",
+          "main-sass": "./app/javascript/src/main.scss"
+        }
+      }
+    ]
   ]
 }
