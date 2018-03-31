@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <Header />
-    <router-view></router-view>
+    <div id="app-content">
+      <router-view></router-view>
+    </div>
     <Footer />
   </div>
 </template>
@@ -19,24 +21,13 @@ export default {
 </script>
 
 <style>
-p {
-  font-size: 15pt;
+#app {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
 }
-.fade-enter-active {
-  animation: fade-in 0.15s;
-}
-.fade-leave-active {
-  animation: fade-in 0.15s reverse;
-}
-@keyframes fade-in {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 0.5;
-  }
-  100% {
-    opacity: 1;
-  }
+
+#app-content {
+  flex: 1;
 }
 </style>

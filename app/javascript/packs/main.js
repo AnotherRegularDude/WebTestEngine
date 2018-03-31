@@ -7,7 +7,7 @@ import Buefy from "buefy";
 import router from "router.js";
 import App from "components/App.vue";
 
-Vue.use(Buefy, { defaultIconPack: "mdi" });
+Vue.use(Buefy);
 
 document.addEventListener("DOMContentLoaded", () => {
   const el = document.body.appendChild(document.createElement("app"));

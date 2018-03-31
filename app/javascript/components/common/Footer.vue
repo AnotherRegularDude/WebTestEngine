@@ -1,5 +1,5 @@
 <template>
-  <footer class="footer">
+  <footer class="footer footer-fixed">
     <div class="container">
       <div class="columns">
         <div class="column">
@@ -20,3 +20,9 @@
     </div>
   </footer>
 </template>
+
+<style>
+.footer-fixed {
+  height: 150px;
+}
+</style>
