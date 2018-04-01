@@ -2,7 +2,9 @@
   <div id="app">
     <Header />
     <div id="app-content">
-      <router-view></router-view>
+      <transition name="fadeLeft" :duration="300" mode="out-in">
+        <router-view></router-view>
+      </transition>
     </div>
     <Footer />
   </div>

@@ -6,9 +6,19 @@
             Web Test Engine
           </h1>
           <h2 class="subtitle">
-            About Info.
+            {{ this.state }}
           </h2>
         </div>
       </div>
   </section>
 </template>
+
+<script>
+import testStore from "stores/testStore.js";
+
+export default {
+  fromMobx: {
+    testStore,
+  },
+};
+</script>

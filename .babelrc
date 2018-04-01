@@ -5,17 +5,18 @@
       {
         "modules": false,
         "targets": {
-          "browsers": ["> 1%", "last 2 versions", "not ie <= 8"],
+          "browsers": ["> 1%"],
           "uglify": true
-        },
-        "useBuiltIns": true
+        }
       }
     ],
     "stage-2"
   ],
 
   "plugins": [
+    "transform-decorators-legacy",
     "syntax-dynamic-import",
+    ["transform-runtime", { "polyfill": false }],
     [
       "module-resolver",
       {
@@ -23,6 +24,8 @@
         "alias": {
           "assets": "./app/javascript/src",
           "packs": "./app/javascript/packs",
+          "api": "./app/javascript/api",
+          "stores": "./app/javascript/stores",
           "components": "./app/javascript/components",
           "main-sass": "./app/javascript/src/main.scss"
         }
