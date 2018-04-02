@@ -2,7 +2,7 @@
   <div id="app">
     <Header />
     <div id="app-content">
-      <transition name="fadeLeft" :duration="300" mode="out-in">
+      <transition name="fade" :duration="700" mode="out-in">
         <router-view></router-view>
       </transition>
     </div>
@@ -15,9 +15,6 @@ import Header from "components/common/Header.vue";
 import Footer from "components/common/Footer.vue";
 
 export default {
-  data: function() {
-    return {};
-  },
   components: { Header, Footer },
 };
 </script>

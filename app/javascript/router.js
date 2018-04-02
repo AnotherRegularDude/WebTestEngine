@@ -1,10 +1,10 @@
 import Vue from "vue";
 import Router from "vue-router";
 
-import Index from "components/Index.vue";
-import About from "components/About.vue";
+import Home from "components/Home.vue";
+import Users from "components/Users.vue";
 
 Vue.use(Router);
-const routes = [{ path: "/", component: Index }, { path: "/about", component: About }];
+const routes = [{ path: "/", component: Home }, { path: "/users", component: Users }];
 
 export default new Router({ routes });

@@ -14,19 +14,15 @@
   ],
 
   "plugins": [
-    "transform-decorators-legacy",
-    "syntax-dynamic-import",
     ["transform-runtime", { "polyfill": false }],
     [
       "module-resolver",
       {
         "root": ["./app/javascript"],
+        "paths": {
+          "*": ["./app/javascript/*"]
+        },
         "alias": {
-          "assets": "./app/javascript/src",
-          "packs": "./app/javascript/packs",
-          "api": "./app/javascript/api",
-          "stores": "./app/javascript/stores",
-          "components": "./app/javascript/components",
           "main-sass": "./app/javascript/src/main.scss"
         }
       }

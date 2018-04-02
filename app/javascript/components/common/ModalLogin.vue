@@ -24,7 +24,7 @@
         </b-field>
       </section>
       <footer class="modal-card-foot">
-        <button class="button is-success" @click="onLoginClick">Login</button>
+        <button class="button is-success" v-shortkey.once="['enter']" @shortkey="onLoginClick" @click.once="onLoginClick">Login</button>
         <button class="button" @click="$emit('close')">Close</button>
       </footer>
     </div>
@@ -32,8 +32,7 @@
 </template>
 
 <script>
-import testStore from "stores/testStore.js";
-import _ from "lodash";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -42,18 +41,19 @@ export default {
       password: "",
     };
   },
-  fromMobx: {
-    testStore,
+  computed: {
+    ...mapGetters(["lastUsername", "lastPassword"]),
   },
-  beforeMount() {
-    _.assign(this, this.currentUser);
+  activated() {
+    this.username = this.lastUsername;
+    this.password = this.lastPassword;
   },
   methods: {
+    ...mapActions(["authenticate"]),
     onLoginClick() {
-      this.$emit("login", {
-        username: this.username,
-        password: this.password,
-      });
+      this.$emit("close");
+
+      this.authenticate({ username: this.username, password: this.password });
     },
   },
 };

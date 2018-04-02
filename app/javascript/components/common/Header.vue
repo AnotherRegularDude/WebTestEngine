@@ -13,15 +13,20 @@
       <div class="navbar-menu" id="mainNav">
         <div class="navbar-start">
           <router-link class="navbar-item" active-class="is-active" :exact="true" to="/">Home</router-link>
-          <router-link class="navbar-item" active-class="is-active" to="/about">About</router-link>
+          <router-link class="navbar-item" active-class="is-active" to="/users">Users</router-link>
         </div>
         <div class="navbar-end">
           <div class="navbar-item">
             <p class="field">
-              <button class="button is-info" :class="{ 'is-loading': isPending }" @click="isModalActive = true">Login</button>
+              <button v-show="!isAuthorized" class="button is-info" @click="isModalActive = true">Login</button>
+              <figure v-if="isAuthorized" class="image is-32x32">
+                <img src="https://bulma.io/images/placeholders/256x256.png">
+              </figure>
 
               <b-modal :active.sync="isModalActive" has-modal-card>
-                <ModalLogin @close="isModalActive = false" @login="onLogin" />
+                <keep-alive>
+                  <ModalLogin @close="isModalActive = false" />
+                </keep-alive>
               </b-modal>
             </p>
           </div>
@@ -31,9 +36,9 @@
 </template>
 
 <script>
-import testStore from "stores/testStore.js";
 import ModalLogin from "components/common/ModalLogin.vue";
-import logoImg from "assets/images/logo.png";
+import { mapGetters } from "vuex";
+import logoImg from "src/images/logo.png";
 
 export default {
   data() {
@@ -42,23 +47,17 @@ export default {
       isModalActive: false,
     };
   },
-  fromMobx: {
-    testStore,
-  },
   computed: {
-    isPending() {
-      return this.state === "pending";
-    },
-  },
-  methods: {
-    onLogin: function({ username, password }) {
-      this.isModalActive = false;
-
-      this.authorizeWithCredentials(username, password);
-    },
+    ...mapGetters(["isAuthorized"]),
   },
   components: {
     ModalLogin,
   },
 };
 </script>
+<style>
+.rounder-image {
+  border-radius: 20px;
+  border-style: inset;
+}
+</style>
