@@ -9,18 +9,7 @@ module.exports = {
   use: [
     {
       loader: "vue-loader",
-      options: {
-        postcss: [
-          require("postcss-import")(),
-          require("postcss-import")({}),
-          require("postcss-cssnext")({
-            features: {
-              customProperties: { warnings: false },
-            },
-          }),
-          // require("precss")({}),
-        ],
-      },
+      options: {},
     },
   ],
 };
