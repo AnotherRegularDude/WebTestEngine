@@ -19,9 +19,7 @@
           <div class="navbar-item">
             <p class="field">
               <button v-show="!isAuthorized" class="button is-info" @click="isModalActive = true">Login</button>
-              <figure v-if="isAuthorized" class="image is-32x32">
-                <img src="https://bulma.io/images/placeholders/256x256.png">
-              </figure>
+              <button v-show="isAuthorized" class="button is-info" @click="logout">Logout</button>
 
               <b-modal :active.sync="isModalActive" has-modal-card>
                 <keep-alive>
@@ -37,7 +35,7 @@
 
 <script>
 import ModalLogin from "components/common/ModalLogin.vue";
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 import logoImg from "src/images/logo.png";
 
 export default {
@@ -50,9 +48,12 @@ export default {
   computed: {
     ...mapGetters(["isAuthorized"]),
   },
+  methods: {
+    ...mapActions(["logout"]),
+  },
   components: {
     ModalLogin,
-  },
+  }
 };
 </script>
 <style>

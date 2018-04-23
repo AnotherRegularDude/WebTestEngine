@@ -56,6 +56,9 @@ const actions = {
       console.log(error);
     }
   },
+  logout({ commit }) {
+    commit("clearAuthData");
+  },
 };
 
 export default {
