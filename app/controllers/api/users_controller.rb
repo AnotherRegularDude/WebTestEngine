@@ -4,6 +4,8 @@ module Api
     before_action :find_user, except: %i[index create]
 
     def index
+      authorize User
+
       @users = User.order(:id).page(params[:page]).decorate
     end
 
