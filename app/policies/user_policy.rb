@@ -1,5 +1,5 @@
 class UserPolicy < ApplicationPolicy
-  def index
+  def index?
     user.teacher? || user.administrator?
   end
 
