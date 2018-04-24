@@ -1,5 +1,5 @@
 module Api
-  class TopicsController < ApplicationController
+  class TopicsController < Api::ApplicationController
     before_action :find_topic, except: %i[index create]
 
     def index

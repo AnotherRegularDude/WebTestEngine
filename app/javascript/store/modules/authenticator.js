@@ -12,6 +12,11 @@ const getters = {
   lastUsername: state => state.lastBadCredentials.username,
   lastPassword: state => state.lastBadCredentials.password,
   isAuthorized: state => !_.isEmpty(state.currentUser),
+  userRole: state => {
+    if (_.isEmpty(state.currentUser)) return "guest";
+
+    return state.currentUser.role;
+  },
   authHeader: state => {
     if (_.isEmpty(state.jwtToken)) return null;
 
@@ -49,7 +54,10 @@ const actions = {
     const auth = credentials;
     try {
       const response = await axios.post("/user_token", { auth });
-      commit("setAuthorizedUser", { userInfo: auth, token: response.data.jwt });
+      const infoResponse = await axios.get("/api/users/current", {
+        headers: { Authorization: `Bearer ${response.data.jwt}` },
+      });
+      commit("setAuthorizedUser", { userInfo: infoResponse.data.user, token: response.data.jwt });
     } catch (error) {
       commit("incrementBadAttempts");
 

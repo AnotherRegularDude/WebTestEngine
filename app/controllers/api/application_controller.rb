@@ -3,9 +3,9 @@ module Api
     include Knock::Authenticable
     include Pundit
 
-    before_action :authenticate_user
-
     rescue_from Pundit::NotAuthorizedError, with: :not_allowed
+
+    before_action :authenticate_user
 
     private
 

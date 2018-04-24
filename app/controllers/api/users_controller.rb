@@ -1,7 +1,7 @@
 module Api
-  class UsersController < ApplicationController
+  class UsersController < Api::ApplicationController
     skip_before_action :authenticate_user, only: [:create]
-    before_action :find_user, except: %i[index create]
+    before_action :find_user, except: %i[index create current]
 
     def index
       authorize User
@@ -19,6 +19,12 @@ module Api
     end
 
     def show; end
+
+    def current
+      @user = current_user
+
+      render :show
+    end
 
     def update
       authorize @user

@@ -8,7 +8,9 @@ Rails.application.routes.draw do
   resources :confirmations, only: [:show]
 
   namespace :api, defaults: { format: :json } do
-    resources :users, except: %i[new edit]
+    resources :users, except: %i[new edit] do
+      get :current, on: :collection
+    end
     resources :topics, except: %i[new edit]
   end
 end
