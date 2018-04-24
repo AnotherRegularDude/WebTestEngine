@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", () => {
     router,
     render: h => h(App),
   });
-  console.log(app);
 
   const navbarBurgers = Array.prototype.slice.call(document.querySelectorAll(".navbar-burger"), 0);
   if (navbarBurgers.length > 0) {
