@@ -17,6 +17,7 @@ const getters = {
 
     return state.currentUser.role;
   },
+  username: state => state.currentUser.username,
   authHeader: state => {
     if (_.isEmpty(state.jwtToken)) return null;
 

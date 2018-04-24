@@ -16,10 +16,9 @@
           <router-link class="navbar-item" active-class="is-active" to="/users">Users</router-link>
         </div>
         <div class="navbar-end">
-          <div class="navbar-item">
+          <div v-show="!isAuthorized" class="navbar-item">
             <p class="field">
-              <button v-show="!isAuthorized" class="button is-info" @click="isModalActive = true">Login</button>
-              <button v-show="isAuthorized" class="button is-info" @click="logout">Logout</button>
+              <button class="button is-info" @click="isModalActive = true">Login</button>
 
               <b-modal :active.sync="isModalActive" has-modal-card>
                 <keep-alive>
@@ -27,6 +26,13 @@
                 </keep-alive>
               </b-modal>
             </p>
+          </div>
+          <div v-show="isAuthorized" class="navbar-item has-dropdown is-hoverable">
+            <a class="navbar-link">{{ username }}</a>
+
+            <div class="navbar-dropdown">
+              <a class="navbar-item" @click.prevent="logout">Logout</a>
+            </div>
           </div>
         </div>
       </div>
@@ -46,14 +52,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isAuthorized"]),
+    ...mapGetters(["isAuthorized", "username"]),
   },
   methods: {
     ...mapActions(["logout"]),
   },
   components: {
     ModalLogin,
-  }
+  },
 };
 </script>
 <style>
