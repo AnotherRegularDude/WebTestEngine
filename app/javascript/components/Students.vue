@@ -49,6 +49,7 @@
         :total="totalCount"
         :current.sync="currentPage"
         :per-page="15"
+        order="is-centered"
         @change="newPage => getUsers(newPage)"
       />
     </section>
@@ -61,7 +62,7 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
-    const currentPage = this.$route.params.page || 1;
+    const currentPage = parseInt(this.$route.params.page || 1);
 
     return {
       currentPage,
@@ -77,6 +78,8 @@ export default {
   },
   methods: {
     async getUsers(page) {
+      this.users = [];
+
       try {
         const response = await axios.get("/api/users", {
           headers: { ...this.authHeader },
@@ -88,7 +91,6 @@ export default {
         this.$el.querySelector("#container").scrollIntoView();
       } catch (error) {
         console.log(error);
-        this.users = [];
       }
     },
   },
