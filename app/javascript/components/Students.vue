@@ -1,28 +1,28 @@
 <template>
   <div class="container is-fluid main-padding">
-    <div class="columns">
-      <div class="column" v-for="user in users" :key="user.id">
+    <div class="columns is-multiline is-mobile" id="container">
+      <div class="column is-narrow" v-for="user in users" :key="user.id">
         <div class="box">
           <article class="media">
             <div class="media-content">
               <div class="content">
-                <div class="field is-grouped is-grouped-multiline">
+                <div class="field is-grouped">
                   <div class="control">
                     <div class="tags has-addons is-marginless">
-                      <span class="tag">Активный</span>
-                      <span class="tag is-info">{{ user.activated.toString() }}</span>
+                      <span class="tag is-size-7">Активный</span>
+                      <span class="tag is-info is-size-7">{{ user.activated.toString() }}</span>
                     </div>
                   </div>
                   <div class="control">
                     <div class="tags has-addons is-marginless">
-                      <span class="tag">Выполняет тест</span>
-                      <span class="tag is-info">false</span>
+                      <span class="tag is-size-7">Выполняет тест</span>
+                      <span class="tag is-info is-size-7">false</span>
                     </div>
                   </div>
                   <div class="control">
                     <div class="tags has-addons is-marginless">
-                      <span class="tag">Пройденные тесты</span>
-                      <span class="tag is-info">5</span>
+                      <span class="tag is-size-7">Пройденные тесты</span>
+                      <span class="tag is-info is-size-7">5</span>
                     </div>
                   </div>
                 </div>
@@ -44,6 +44,14 @@
         </div>
       </div>
     </div>
+    <section class="section">
+      <b-pagination
+        :total="totalCount"
+        :current.sync="currentPage"
+        :per-page="15"
+        @change="newPage => getUsers(newPage)"
+      />
+    </section>
   </div>
 </template>
 
@@ -53,7 +61,11 @@ import { mapGetters } from "vuex";
 
 export default {
   data() {
+    const currentPage = this.$route.params.page || 1;
+
     return {
+      currentPage,
+      totalCount: 0,
       users: [],
     };
   },
@@ -61,7 +73,7 @@ export default {
     ...mapGetters(["authHeader"]),
   },
   created() {
-    this.getUsers(1);
+    this.getUsers(this.currentPage);
   },
   methods: {
     async getUsers(page) {
@@ -72,6 +84,8 @@ export default {
         });
 
         this.users = response.data.data;
+        this.totalCount = response.data.meta.total_count;
+        this.$el.querySelector("#container").scrollIntoView();
       } catch (error) {
         console.log(error);
         this.users = [];
