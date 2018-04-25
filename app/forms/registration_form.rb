@@ -9,7 +9,7 @@ class RegistrationForm < ApplicationForm
   attribute :patronymic, String
 
   validates :username, :password, presence: true
-  validates :first_name, :last_name, presence: true, length: { maximum: 40 }
+  validates :first_name, :last_name, presence: true, length: { maximum: 20 }
   validates :patronymic, length: { maximum: 50 }, allow_nil: true
   validates :email, format: {
     with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i,

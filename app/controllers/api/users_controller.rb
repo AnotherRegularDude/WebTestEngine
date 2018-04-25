@@ -6,7 +6,7 @@ module Api
     def index
       authorize User
 
-      @users = User.order(:id).page(params[:page]).decorate
+      @users = User.with_role(params[:role]).order(:id).page(params[:page]).decorate
     end
 
     def create
