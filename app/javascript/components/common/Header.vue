@@ -13,7 +13,7 @@
       <div class="navbar-menu" id="mainNav">
         <div class="navbar-start">
           <router-link class="navbar-item" active-class="is-active" :exact="true" to="/">Home</router-link>
-          <router-link class="navbar-item" active-class="is-active" to="/users">Users</router-link>
+          <router-link v-show="isTeacher" class="navbar-item" active-class="is-active" to="/students">Students</router-link>
         </div>
         <div class="navbar-end">
           <div v-show="!isAuthorized" class="navbar-item">
@@ -31,7 +31,7 @@
             <a class="navbar-link">{{ username }}</a>
 
             <div class="navbar-dropdown">
-              <a class="navbar-item" @click.prevent="logout">Logout</a>
+              <a class="navbar-item" @click.prevent="onLogoutClick">Logout</a>
             </div>
           </div>
         </div>
@@ -52,10 +52,15 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["isAuthorized", "username"]),
+    ...mapGetters(["isAuthorized", "username", "isTeacher"]),
   },
   methods: {
     ...mapActions(["logout"]),
+    onLogoutClick() {
+      this.logout();
+
+      this.$router.push("/");
+    },
   },
   components: {
     ModalLogin,

@@ -7,7 +7,7 @@ end
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'draper'
-gem 'faker'
+gem 'ffaker'
 gem 'hashie'
 gem 'kaminari'
 gem 'knock'

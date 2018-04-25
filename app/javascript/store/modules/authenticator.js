@@ -12,6 +12,7 @@ const getters = {
   lastUsername: state => state.lastBadCredentials.username,
   lastPassword: state => state.lastBadCredentials.password,
   isAuthorized: state => !_.isEmpty(state.currentUser),
+  isTeacher: (state, getters) => getters.userRole === "teacher",
   userRole: state => {
     if (_.isEmpty(state.currentUser)) return "guest";
 
