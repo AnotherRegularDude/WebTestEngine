@@ -12,8 +12,8 @@
       </div>
       <div class="navbar-menu" id="mainNav">
         <div class="navbar-start">
-          <router-link class="navbar-item" active-class="is-active" :exact="true" to="/">Home</router-link>
-          <router-link v-show="isTeacher" class="navbar-item" active-class="is-active" to="/students">Students</router-link>
+          <router-link class="navbar-item" active-class="is-active" :exact="true" to="/">Домой</router-link>
+          <router-link v-show="isTeacher" class="navbar-item" active-class="is-active" to="/students">Студенты</router-link>
         </div>
         <div class="navbar-end">
           <div v-show="!isAuthorized" class="navbar-item">
