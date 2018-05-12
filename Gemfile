@@ -21,7 +21,7 @@ gem 'rails', '~> 5.1.5'
 gem 'redis-rails'
 gem 'sidekiq'
 gem 'virtus'
-gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
+# gem 'webpacker', git: 'https://github.com/rails/webpacker.git'
 
 group :development, :test do
   gem 'pry-byebug'
