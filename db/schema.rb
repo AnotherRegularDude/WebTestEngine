@@ -18,8 +18,9 @@ ActiveRecord::Schema.define(version: 20180311015913) do
 
   create_table "topics", force: :cascade do |t|
     t.text "title", null: false
-    t.text "short_description", null: false
-    t.integer "number_of_questions", null: false
+    t.text "short_description"
+    t.interval "complete_time", null: false
+    t.integer "complete_percentage", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["title"], name: "index_topics_on_title", unique: true
