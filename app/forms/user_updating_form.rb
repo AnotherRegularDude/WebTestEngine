@@ -18,7 +18,9 @@ class UserUpdatingForm < ApplicationForm
 
   def persist!
     @user.update!(attributes.compact)
+    true
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = invalid.record.errors
+    false
   end
 end

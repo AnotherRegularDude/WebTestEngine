@@ -16,7 +16,9 @@ class TopicCreationForm < ApplicationForm
 
   def persist!
     @topic = Topic.create!(attributes).decorate
+    true
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = invalid.record.errors
+    false
   end
 end

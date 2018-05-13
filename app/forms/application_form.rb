@@ -10,6 +10,5 @@ class ApplicationForm
     return false unless valid?
 
     persist!
-    true
   end
 end

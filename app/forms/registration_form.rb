@@ -30,7 +30,9 @@ class RegistrationForm < ApplicationForm
     @user = User.create!(attributes).decorate
 
     EmailerJob.perform_later(@user)
+    true
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = invalid.record.errors
+    false
   end
 end

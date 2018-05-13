@@ -20,7 +20,9 @@ class TopicUpdatingForm < ApplicationForm
 
   def persist!
     @topic.update!(attributes.compact)
+    true
   rescue ActiveRecord::RecordInvalid => invalid
     @errors = invalid.record.errors
+    false
   end
 end
