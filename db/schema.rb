@@ -19,7 +19,7 @@ ActiveRecord::Schema.define(version: 20180311015913) do
   create_table "topics", force: :cascade do |t|
     t.text "title", null: false
     t.text "short_description"
-    t.interval "complete_time", null: false
+    t.integer "complete_time", null: false
     t.integer "complete_percentage", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

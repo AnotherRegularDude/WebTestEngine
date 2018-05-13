@@ -12,7 +12,7 @@ class AuthenticationForm < ApplicationForm
 
   def persist!
     @user = User.find_by(username: username)&.authenticate(password)
-    if @user.present? && @user.activated?
+    if @user&.activated?
       @user = @user.decorate
       return true
     end

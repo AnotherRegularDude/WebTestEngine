@@ -6,4 +6,8 @@ class TopicPolicy < ApplicationPolicy
   def update?
     user.teacher? || user.administrator?
   end
+
+  def destroy?
+    user.teacher? || user.administrator?
+  end
 end

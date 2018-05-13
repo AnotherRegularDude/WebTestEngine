@@ -19,7 +19,9 @@ module Api
       render 'api/users/show'
     end
 
-    def destroy; end
+    def destroy
+      session.reset!
+    end
 
     private
 

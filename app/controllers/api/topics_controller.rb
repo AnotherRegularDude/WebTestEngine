@@ -11,7 +11,7 @@ module Api
     def create
       authorize Topic
 
-      @form = TopicCreationForm.new(topic_params)
+      @form = TopicForm.new(topic_params)
       if @form.save
         render status: :created
       else
@@ -22,8 +22,7 @@ module Api
     def update
       authorize Topic
 
-      @form = TopicUpdatingForm.new(topic_params)
-      @form.topic = @topic
+      @form = TopicForm.new({ topic: @topic }.merge(topic_params))
 
       if @form.save
         render :create, status: :ok
@@ -32,12 +31,17 @@ module Api
       end
     end
 
-    def destroy; end
+    def destroy
+      authorize Topic
+
+      @topic.destroy
+      head :ok
+    end
 
     private
 
     def topic_params
-      params.require(:topic).permit(:title, :short_description, :number_of_questions)
+      params.require(:topic).permit(:title, :short_description, :complete_time, :complete_percentage)
     end
 
     def find_topic
