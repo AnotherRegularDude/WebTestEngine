@@ -10,11 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180311015913) do
+ActiveRecord::Schema.define(version: 20180513141901) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
   enable_extension "pgcrypto"
+
+  create_table "articles", force: :cascade do |t|
+    t.text "title", null: false
+    t.text "short_description", null: false
+    t.text "body_md", null: false
+    t.text "body_raw", null: false
+    t.bigint "topic_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_articles_on_topic_id"
+  end
 
   create_table "topics", force: :cascade do |t|
     t.text "title", null: false

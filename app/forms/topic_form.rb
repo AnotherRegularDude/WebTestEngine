@@ -5,7 +5,7 @@ class TopicForm < ApplicationForm
   attribute :complete_percentage
 
   def topic
-    @topic ||= Topic.new
+    @topic ||= Topic.new.decorate
   end
 
   def topic=(value)
