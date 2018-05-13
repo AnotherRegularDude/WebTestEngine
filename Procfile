@@ -1,2 +1,2 @@
-backend: rails s -p 3000
-sidekiq: sidekiq -C config/sidekiq.yml
+backend: bundle exec rails s -p 3000
+sidekiq: bundle exec sidekiq -C config/sidekiq.yml
