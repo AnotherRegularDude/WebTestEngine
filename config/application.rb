@@ -18,7 +18,7 @@ module WebTestEngine
     config.available_locales = %i[en ru]
     config.default_locale = :en
 
-    config.x = Hashie::Mash.new YAML.safe_load(ERB.new(File.read(Rails.root.join('config', 'settings.yml'))).result)
+    config.x = Hashie::Mash.new(Rails.application.config_for(:settings))
 
     config.cache_store = :redis_store, "#{config.x.global_info.redis.connection_url}/cache", { expires_in: 90.minutes }
     config.session_store :cookie_store, expire_after: 14.days

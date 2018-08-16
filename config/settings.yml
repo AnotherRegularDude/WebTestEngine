@@ -1,4 +1,14 @@
-global_info:
-  url: http://localhost:3000
-  redis:
-    connection_url: <%= ENV['REDIS_CONNECTION_URL'] %>
+default: &default
+  global_info:
+    url: http://localhost:3000
+    redis:
+      connection_url: <%= ENV['REDIS_CONNECTION_URL'] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
